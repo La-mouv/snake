@@ -79,3 +79,9 @@ function draw() {
 }
 
 let game = setInterval(draw, 100);
+
+function startGame() {
+    document.getElementById("startScreen").style.display = "none";
+    game = setInterval(draw, 100);
+}
+
