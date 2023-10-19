@@ -68,8 +68,9 @@ function draw() {
     }
 
     if(snakeX < 0 || snakeY < 0 || snakeX >= canvasSize || snakeY >= canvasSize || collision(newHead, snake)) {
-        clearInterval(game);
-    }
+    endGame();
+    return; // Cette ligne est importante pour arrêter la fonction draw après avoir appelé endGame.
+}
 
     snake.unshift(newHead);
 
@@ -83,5 +84,24 @@ let game = setInterval(draw, 100);
 function startGame() {
     document.getElementById("startScreen").style.display = "none";
     game = setInterval(draw, 100);
+}
+
+function endGame() {
+    clearInterval(game);
+
+    // Réinitialiser l'état du jeu
+    snake = [];
+    snake[0] = {x: boxCount / 2 * boxSize, y: boxCount / 2 * boxSize};
+    d = undefined; // réinitialise la direction
+    score = 0;
+
+    food = {
+    x: Math.floor(Math.random() * boxCount) * boxSize,
+    y: Math.floor(Math.random() * boxCount) * boxSize
+};
+
+    
+    // Afficher l'écran d'accueil
+    document.getElementById("startScreen").style.display = "flex";
 }
 
